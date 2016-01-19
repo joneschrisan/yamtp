@@ -23,9 +23,9 @@ YAMTP should be used with the following constraints.
 | UPDATE | Used to update data on the server (Update a record in a database) |
 | DELETE | Used to delete data from the server (Delete a record from a database) |
 
-HTTP auth should never be used. Instead authentication should be done on the server side with details passed to the server on each request when required within a message
+*HTTP auth should never be used. Instead* authentication should be done on the server side with details passed to the server on each request when required within a message
 
-For multiple requests with different headers and/or authentication send an array of requests.
+For multiple requests with different headers send an array of requests.
 
 Empty value should not indecate false, and the same in repect that a value of any kind should not indecate a true value.
 
