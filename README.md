@@ -96,11 +96,11 @@ If callback is omitted then same domain request restrictions apply.
 ```json
 {
   "headers": {
-    "mime"		: "text/plain",
+    	"mime"		: "text/plain",
 		"enc"		: null,
 		"auth"		: false,
 		"type"		: "get"
-  },
+  	},
 	"message"	: "foobar"
 }
 ```
@@ -109,11 +109,11 @@ If callback is omitted then same domain request restrictions apply.
 ```json
 {
   "headers": {
-    "mime"		: "text/plain",
+    	"mime"		: "text/plain",
 		"enc"		: null,
 		"auth"		: false,
 		"type"		: "get"
-  },
+  	},
 	"message"	: [
 		"foo",
 		"bar"
@@ -124,11 +124,11 @@ If callback is omitted then same domain request restrictions apply.
 ```json
 {
   "headers": {
-    "mime"		: "text/plain",
+    	"mime"		: "text/plain",
 		"enc"		: null,
 		"auth"		: false,
 		"type"		: "get"
-  },
+  	},
 	"message"	: {
 		"foo" : "bar"
 	}
@@ -140,7 +140,7 @@ If callback is omitted then same domain request restrictions apply.
 [
 	{
 	  "headers": {
-      "mime"		: "text/plain",
+      	"mime"		: "text/plain",
   		"enc"		: null,
   		"auth"		: false,
   		"type"		: "get"
@@ -149,7 +149,7 @@ If callback is omitted then same domain request restrictions apply.
 	},
 	{
 	  "headers": {
-      "mime"		: "text/plain",
+      	"mime"		: "text/plain",
   		"enc"		: null,
   		"auth"		: true,
   		"type"		: "get"
@@ -159,11 +159,17 @@ If callback is omitted then same domain request restrictions apply.
 ]
 ```
 
-###Return message
+###Response message
 
 ####1 Passed message
 ```json
 {
+	"headers": {
+    	"mime"		: "text/plain",
+		"enc"		: null,
+		"auth"		: false,
+		"type"		: "get"
+  	},
 	"message"	: {
 		"passed" : true
 	}
@@ -173,6 +179,12 @@ If callback is omitted then same domain request restrictions apply.
 ####2 Passed message with data
 ```json
 {
+	"headers": {
+    	"mime"		: "text/plain",
+		"enc"		: null,
+		"auth"		: false,
+		"type"		: "get"
+  	},
 	"message"	: {
 		"passed"	: false,
 		"data"		: {
