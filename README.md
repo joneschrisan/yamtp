@@ -1,9 +1,9 @@
 #YAMTP
-The Yet Anpother Message Transfer Protocol
+The Yet Another Message Transfer Protocol
 
 ##About
 
-YAMTP (pronounced yam-t-p) endevers to create a simple yet expandable message protocol for comunication between servers of multiple different types and using multiple diferent languages
+YAMTP (pronounced yam-t-p) endevours to create a simple yet expandable message protocol for comunication between servers of multiple different types and using multiple diferent languages
 
 ##Definition
 
@@ -27,7 +27,7 @@ YAMTP should be used with the following constraints.
 
 For multiple requests with different headers send an array of requests.
 
-Empty value should not indecate false, and the same in repect that a value of any kind should not indecate a true value.
+Empty value should not indicate false, and the same in repect that a value of any kind should not indicate a true value.
 
 Data MUST be either URL safe, or BASE64 or UU encoded. If encoded then the enc property of the request must be set.
 
