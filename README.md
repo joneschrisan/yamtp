@@ -9,11 +9,11 @@ YAMTP (pronounced yam-t-p) endevers to create a simple yet expandable message pr
 
 YAMTP should be used with the following constraints.
 
-*A request should be transfered over the HTTP 1.1 protocol and follow the definition provided by W3C (https://www.w3.org/Protocols/rfc2616/rfc2616.html)
+*A request should be transfered over the HTTP 1.1 protocol and follow the definition provided by W3C (https://www.w3.org/Protocols/rfc2616/rfc2616.html)*
 
-All requests should be transmitted using SSL (HTTPS)
+*All requests should be transmitted using SSL (HTTPS)*
 
-HTTP Methods should be used and for the following reasons only.*
+*HTTP Methods should be used and for the following reasons only.*
 
 | Name | Description |
 | --- | --- |
