@@ -350,7 +350,7 @@ namespace yamtp {
 			return new self($host, $port);
 		}
 		
-		protected static function send_static(&$rs, $data, $method = yamtp::POST, $transport_agent = self::CURL) {
+		protected static function send_static(&$rs, $data, $method = yamtp::POST, $transport_agent = self::RAW) {
 			$rs->data = $data;
 			$rs->method = $method;
 			$rs->transport_agent = $transport_agent;
@@ -359,6 +359,9 @@ namespace yamtp {
 		/* End static */
 		
 		/* Start private */
+		/**
+		 * Possibly not used
+		 */
 		private function send_curl() {
 			$url = $this->vars['host'] . ":" . $this->vars['port'];
 			$ch = curl_init();
@@ -410,6 +413,9 @@ namespace yamtp {
 		/* Not used in PHP */
 		private function send_xhttp() {}
 		
+		/**
+		 * Possibly not used
+		 */
 		private function send_stream() {
 			$url = $this->vars['host'] . ":" . $this->vars['port'];
 			
@@ -453,27 +459,17 @@ namespace yamtp {
 			if (strpos(".", $tmp) > 0)
 				$page = $tmp;
 			
-			if ($this->vars['method'] == yamtp::GET) {
-				if (strpos("?", $url) === false) {
-					$url .= "?"
-				} else {
-					$url .= "&";
-				}
-				$url .= urlencode($this->vars['data']);
-			} else {
-				$content = http_build_query($this->vars['data']);
-			}
-			
 			if ($fp = fsockopen($url, $this->vars['port'])) {
-				fwrite($fp, strtouper($this->vars['method']) . " /{$page} HTTP/1.1\r\n");
-				fwrite($fp, "Host: {$this->vars['host']}\r\n");
-				fwrite($fp, "Content-Type: application/x-www-form-urlencoded\r\n");
-				fwrite($fp, "Content-Length: " . strlen($content) . "\r\n");
-				fwrite($fp, "Connection: close\r\n");
+				fwrite($fp, "YAMTP/1.0.00\r\n");
+				fwrite($fp, "host: {$this->vars['host']}\r\n");
+				fwrite($fp, "page: {$page}\r\n");
+				fwrite($fp, "content-length: " . strlen($content) . "\r\n");
+				fwrite($fp, "referer: {$_SERVER['SERVER_ADDR']} ({$_SERVER['SERVER_NAME']})\r\n");
+				fwrite($fp, "originator: {$_SERVER['REMOTE_ADDR']} ({$_SERVER['REMOTE_HOST']})");
 				fwrite($fp, "\r\n");
 				
 				if ($content)
-					fwrite($fp, $content);
+					fwrite($fp, $this->vars['data']);
 				
 				while (!feof($fp)) {
 					$this->vars['result'] .= fgets($fp, 1024);
