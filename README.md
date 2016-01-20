@@ -5,6 +5,8 @@ The Yet Another Message Transfer Protocol
 
 YAMTP (pronounced yam-t-p) endevours to create a simple yet expandable message protocol for comunication between servers of multiple different types and using multiple diferent languages
 
+*NOTE: This definition has not yet been finished and finalized. As such it may (and probably will) change without warning. A version number will be added when the definition has been finalized!*
+
 ##Definition
 
 YAMTP should be used with the following constraints.
