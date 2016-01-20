@@ -9,11 +9,23 @@ YAMTP (pronounced yam-t-p) endevours to create a simple yet expandable message p
 
 YAMTP should be used with the following constraints.
 
-*A request should be transfered over the HTTP 1.1 protocol and follow the definition provided by W3C (https://www.w3.org/Protocols/rfc2616/rfc2616.html)*
+##Stream content:
+```
+YAMTP/version\r\n
+host: remote hostname\r\n
+page: remote page\r\n
+method: method used\r\n
+content-length: length of data in bytes\r\n
+referer: ip address of computer sending the request (host name of computer sending the request)\r\n
+originator: ip address of computer making the request (host name of computer making the request)\r\n
+\r\n
+content data
+```
 
-*All requests should be transmitted using SSL (HTTPS)*
+**All requests should be transmitted encrypted via ssl.**
 
-*HTTP Methods should be used and for the following reasons only.*
+##Methods
+**Methods are the same as HTTP methods and should only be used for the following reasons**
 
 | Name | Description |
 | --- | --- |
@@ -23,7 +35,7 @@ YAMTP should be used with the following constraints.
 | UPDATE | Used to update data on the server (Update a record in a database) |
 | DELETE | Used to delete data from the server (Delete a record from a database) |
 
-*HTTP auth should never be used. Instead* authentication should be done on the server side with details passed to the server on each request when required within a message
+Authentication should be done on the server side with details passed to the server on each request when required within a message.
 
 For multiple requests with different headers send an array of requests.
 
@@ -39,18 +51,19 @@ If authentication is used then message MUST be of type object and MUST contain a
 
 On auth fail the server MUST respond with a failed message. Response data MUST NEVER say exactly why the authentication has failed but can be vague.
 #####Eg.
-```
-OK:		"Sorry the username and password did not match our records"
-BAD:	"The username could not be found". | "The password was incorrect for the username given"
-```
+
+**OK: "Sorry the username and password did not match our records"**
+
+**BAD: "The username could not be found". | "The password was incorrect for the username given"**
  
 When deleting records from the server the data should not actually be deleted but instead some means of telling subsiquent requests that that data has been deleted.
 #####In a database example this could be a flag or a field set to say that record has been deleted.
-```
-Never use POST/GET/DELETE to add or update data.
-Never use PUT to update data. If data already exists then return false/failed message.
-Never use UPDATE to add data. If data does not exist then return false/failed message.
-```
+
+**Never use POST/GET/DELETE to add or update data.**
+
+**Never use PUT to update data. If data already exists then return false/failed message.**
+
+**Never use UPDATE to add data. If data does not exist then return false/failed message.**
 
 Response messages MUST be of type object and MUST contain a property "passes" with a boolean value of true or false, 1 or 0.
 
@@ -66,8 +79,7 @@ Functions MUST NEVER be sent in message requests or responses. Function names ca
 	"headers"	: {
 		"mime"		: "text/plain",
 		"enc"		: null,
-		"auth"		: false,
-		"type"		: "get"
+		"auth"		: false
 	},
 	"message"	: [],
 	"callback"	: null
@@ -81,13 +93,10 @@ Functions MUST NEVER be sent in message requests or responses. Function names ca
 | mime | String | text/plain | Yes | A string containing the mime type of the message(s) being sent. |
 | enc | String | NULL | Yes | A string containing the encoding type of the mesasge(s) being sent. |
 | auth | Boolean | FALSE | Yes | Boolean, set if the message sent is required to be authed on the recieving end. |
-| type | String | get | Yes | The message protocol to use. get, post, put, update, delete. |
 | message | Mixed | Enpty Array | Yes | A String message or an array of mixed messages to be sent. |
 | callback | String | NULL | No | A string containing a function name to be used with jsonp requests as a callback. |
 
-```
-If callback is omitted then same domain request restrictions apply.
-```
+**If callback is omitted then same domain request restrictions apply.**
 
 ##Examples
 ###Send message
@@ -98,8 +107,7 @@ If callback is omitted then same domain request restrictions apply.
   "headers": {
     	"mime"		: "text/plain",
 		"enc"		: null,
-		"auth"		: false,
-		"type"		: "get"
+		"auth"		: false
   	},
 	"message"	: "foobar"
 }
@@ -111,8 +119,7 @@ If callback is omitted then same domain request restrictions apply.
   "headers": {
     	"mime"		: "text/plain",
 		"enc"		: null,
-		"auth"		: false,
-		"type"		: "get"
+		"auth"		: false
   	},
 	"message"	: [
 		"foo",
@@ -126,8 +133,7 @@ If callback is omitted then same domain request restrictions apply.
   "headers": {
     	"mime"		: "text/plain",
 		"enc"		: null,
-		"auth"		: false,
-		"type"		: "get"
+		"auth"		: false
   	},
 	"message"	: {
 		"foo" : "bar"
@@ -142,8 +148,7 @@ If callback is omitted then same domain request restrictions apply.
 	  "headers": {
       	"mime"		: "text/plain",
   		"enc"		: null,
-  		"auth"		: false,
-  		"type"		: "get"
+  		"auth"		: false
     },
 		"message"	: "foo"
 	},
@@ -151,8 +156,7 @@ If callback is omitted then same domain request restrictions apply.
 	  "headers": {
       	"mime"		: "text/plain",
   		"enc"		: null,
-  		"auth"		: true,
-  		"type"		: "get"
+  		"auth"		: true
     },
 		"message"	: "bar"
 	}
@@ -167,8 +171,7 @@ If callback is omitted then same domain request restrictions apply.
 	"headers": {
     	"mime"		: "text/plain",
 		"enc"		: null,
-		"auth"		: false,
-		"type"		: "get"
+		"auth"		: false
   	},
 	"message"	: {
 		"passed" : true
@@ -182,8 +185,7 @@ If callback is omitted then same domain request restrictions apply.
 	"headers": {
     	"mime"		: "text/plain",
 		"enc"		: null,
-		"auth"		: false,
-		"type"		: "get"
+		"auth"		: false
   	},
 	"message"	: {
 		"passed"	: false,
