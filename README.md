@@ -205,6 +205,11 @@ The JSON object should contain the following properties, arrays, and objects:
 
 #####2.1.2.1: Headers
 
+* [method](#21211-method)
+* [mime](#21212-mime)
+* [enc](#21213-enc)
+* [auth](#21214-auth)
+
 Headers in an object of properties.
 
 Following are the header properties types, default values, and valid values.
@@ -274,6 +279,9 @@ For authentication responses and errors please see the authentication section.
 [Top](#yamtp)
 
 #####2.1.2.2: Credentials
+
+* [2.1.2.2.1: Username](#21221-username)
+* [2.1.2.2.2: Password](#21222-password)
 
 * **Type:** *Object*
 * *Default:* *{ "username": "", "password": "" }*
