@@ -169,7 +169,7 @@ In the case of the Content-Length header not matching the length of the data sen
 
 ####2.1.2: Stream Data
 
-* [headers](#2121-eaders)
+* [headers](#2121-headers)
   * [method](#21211-method)
   * [mime](#21212-mime)
   * [enc](#21213-enc)
@@ -282,10 +282,6 @@ For authentication responses and errors please see the authentication section.
 
 * [2.1.2.2.1: Username](#21221-username)
 * [2.1.2.2.2: Password](#21222-password)
-
-* **Type:** *Object*
-* *Default:* *{ "username": "", "password": "" }*
-* *Values:* *Object*
 
 This is the user credentials object.
 
