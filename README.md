@@ -25,7 +25,7 @@ The Yet Another Message Transfer Protocol.
 
 [2.1.1.7: Content-Length](#2117-content-length)
 
-[2.1.2: Stream Data](212-stream-data)
+[2.1.2: Stream Data](#212-stream-data)
 
 ##1: About
 
