@@ -13,7 +13,17 @@ The Yet Another Message Transfer Protocol.
       * [2.1.1.5: Connection **TODO**](#2115-connection)
       * [2.1.1.6: Content-Type](#2116-content-type)
       * [2.1.1.7: Content-Length](#2117-content-length)
-     * [2.1.2: Stream Data **TODO**](#212-stream-data)
+     * [2.1.2: Stream Data](#212-stream-data)
+	   * [2.1.2.1: Headers](2121-headers)
+         * [2.1.2.1.1: Method](21211-method)
+		 * [2.1.2.1.2: Mime](21212-mime)
+         * [2.1.2.1.3: Enc](21213-enc)
+		 * [2.1.2.1.4: Auth](21214-auth)
+	   * [2.1.2.2: Credentials **TODO**](#2122-credentials)
+		 * [2.1.2.2.1: Username **TODO**](#21221-username)
+		 * [2.1.2.2.2: Password **TODO**](#21222-password)
+       * [2.1.2.3: Message **TODO**](#2123-message)
+       * [2.1.2.4: Callback **TODO**](#2124-callback)
 
 ##1: About
 
@@ -47,9 +57,9 @@ Sessions should NEVER be used. Please see the authentication section for mor det
 
 The data stream should consist of:
 ```
-Headers\r\n
+[Headers](#211-stream-eaders)\r\n
 \r\n
-Content Data\r\n
+[Content Data](#212-stream-data)\r\n
 \r\n
 ```
 
@@ -57,11 +67,11 @@ Content Data\r\n
 
 ####2.1.1: Stream Headers
 ```
-[method] [path to page] YAMTP/[version]\r\n
-Host: [remote hostname]\r\n
-Connection: [connection type]\r\n
-Content-Type: text/json\r\n
-Content-Length: [length of data in bytes]\r\n
+[[method]](#2111-methods) [[path to page]](#2112-pages) [YAMTP/[version]](#2113-protocols-and-versions)\r\n
+[Host: [remote hostname]](#2114-host)\r\n
+[Connection: [connection type]](#2115-connection)\r\n
+[Content-Type: text/json](#2116-content-type)\r\n
+[Content-Length: [length of data in bytes]](#2117-content-length)\r\n
 \r\n
 ```
 
@@ -116,7 +126,7 @@ This should be set to the hostname or IP address of the server hosting the reque
 
 A check should be done to see if the hostname or IP address in this header matches the actuall hostname or IP address before any processing is done.
 
-In the case of a mismatch then a ```417 Expectation Failed``` error should be returned.
+In the case of a mismatch then a ```400 Bad Request``` error should be returned.
 
 [Top](#yamtp)
 
@@ -150,7 +160,131 @@ In the case of the Content-Length header not matching the length of the data sen
 
 ####2.1.2: Stream Data
 
+Data should always be valid JSON.
+
+The JSON object should contain the following properties, arrays, and objects:
+
+```json
+{
+    "[headers](#2121-eaders)"   	: {
+		"[method](#21211-method)": String
+        "[mime](#21212-mime)"	: String,
+        "[enc](#21213-enc)"   : NULL|String,
+        "[auth](#21214-auth)"  : TRUE|FALSE
+    },
+	"[credentials](#2122-credentials)"	: {
+		"[username](#21221-username)"	: String
+		"[password](#21222-password)"	: String
+	},
+    "[message](#2123-message)"   	: Array|String,
+    "[callback](#2124-callback)"  	: NULL
+}
+```
+
+[Top](#yamtp)
+
+#####2.1.2.1: Headers
+
+Headers in an object of properties.
+
+Following are the header properties types, default values, and valid values.
+
+Headers is required by the server. If it is not sent the a ```400 Bad Request``` error should be returned.
+
+[Top](#yamtp)
+
+######2.1.2.1.1: Method
+
+**Type:** *String*
+*Default:* *GET*
+*Values:* *GET, POST, PUT, UPDATE, DELETE*
+
+The method is set here to keep consistancy when using a non YAMTP server.
+
+When using a YAMTP server this value should be the same as the method passed to the server.
+ When using an HTTP server the server method should ONLY EVER be POST where as this value should be the YAMTP method to use.
+
+This property should always be set. If it is not set or it is not a valid value then a ```400 Bad Request``` error should be returned.
+
+If the method is set and is a valid method but the proccess requires a diferent method then a ```405 Method Not Allowed``` error should be returned.
+
+[Top](#yamtp)
+
+######2.1.2.1.2: Mime
+
+**Type:** *String*
+*Default:* *text/plain*
+*Values:* *Any valid mime type*
+
+The mime type of the message or all messages if message is an array of messages.
+
+This must match the mime type of the message and be done before proccessing is done.
+ If message is an array then all messages in the array should be checked against this mime type before proccessing is done.
+
+This property should always be set. If it is not set it does not match the, or any message then a ```400 Bad Request``` error should be returned.
+
+[Top](#yamtp)
+
+######2.1.2.1.3: Enc
+
+**Type:** *String*
+*Default:* *text/plain*
+*Values:* *URL* or *BASE64* or *UUENCODE*
+
+If the message or messages are encoded in any way then this needs to be set to the type of encoding used.
+
+If the message or messages are not encoded then this value should be set to null.
+
+This property should always be set. If it is not set or it is not a valid value then a ```422 Unprocessable Entity``` error should be returned.
+
+[Top](#yamtp)
+
+######2.1.2.1.4: Auth
+
+**Type:** *Boolean*
+*Default:* *FALSE*
+*Values:* *TRUE* or *FALSE*
+
+If set to TRUE then the server shold look for the credentials property. If set to FALSE the the credentials property is ignored.
+
+This property should always be set. If it is not set or it is not a valid value then a ```422 Unprocessable Entity``` error should be returned.
+
+For authentication responses and errors please see the authentication section.
+
+[Top](#yamtp)
+
+#####2.1.2.2: Credentials
+
 **TODO**
+
+[Top](#yamtp)
+
+######2.1.2.2.1: Username
+
+**TODO**
+
+[Top](#yamtp)
+
+######2.1.2.2.2: Password
+
+**TODO**
+
+[Top](#yamtp)
+
+#####2.1.2.3: Message
+
+**TODO**
+
+[Top](#yamtp)
+
+#####2.1.2.4: Callback
+
+**TODO**
+
+[Top](#yamtp)
+
+
+---
 
 ***Changing the rest of this file***
 
