@@ -19,6 +19,14 @@ The Yet Another Message Transfer Protocol.
 
 [2.1.1.4: Host](#2114-host)
 
+[2.1.1.5: Connection](#2115-connection)
+
+[2.1.1.6: Content-Type](#2116-content-type)
+
+[2.1.1.7: Content-Length](#2117-content-length)
+
+[2.1.2: Stream Data](212-stream-data)
+
 ##1: About
 
 YAMTP (pronounced yam-t-p) endevours to create a simple yet expandable message protocol for comunication between servers of multiple different types and using multiple diferent languages.
@@ -39,7 +47,7 @@ YAMTP is loosely bases on the HTTP 1.1 (rfc2616) protocol (found [here](https://
 
 Any transport method can be used in reality so long as the payload and the form headers are passed to the request handeler are kept the same.
 
-**ALL requests should be transmitted encrypted via ssl. NEVER under any circumstance should a transfer take place as plain text.**
+**ALL requests and responses should be transmitted encrypted via ssl. NEVER under any circumstance should a transfer take place as plain text.**
 
 All lines should end with ```CRLF``` (```\r\n```) NOT ```CR``` (```\r```) or ```LF``` (```\n```).
 
@@ -85,6 +93,8 @@ Methods are the same as HTTP methods and should only be used for the following r
 | UPDATE | Used to update data on the server (Update a record in a database) |
 | DELETE | Used to delete data from the server (Delete a record from a database) |
 
+In the case of an unknown method or the method not being given then a ```405 Method Not Allowed``` error should be returned.
+
 [Top](#yamtp)
 
 #####2.1.1.2: Pages
@@ -96,6 +106,8 @@ The page ([path to page] in the header stream example [above](#211streamheaders)
 * If foo.yamtp in inside a sub directory of foobar on the file system then the path to page should be ```/foobar/foo.yamtp```
 * The same goes for document root if using a web server to host a YAMTP service.
 
+In the case of the page not being found then a ```404 Not Found``` error should be returned.
+
 [Top](#yamtp)
 
 #####2.1.1.3: Protocols and Versions
@@ -106,12 +118,51 @@ The version number is the version of the protocol you are using. ```0.0.03``` fo
 
 The protocol and version should be seperated with a ```/```.
 
+If the version of the protocol requested is not accepted by the server then a ```505 YAMTP Version Not Supported``` or ```505 HTTP Version Not Supported``` should be returned.
+
 [Top](#yamtp)
 
 #####2.1.1.4: Host
 
+This should be set to the hostname or IP address of the server hosting the request service.
+
+A check should be done to see if the hostname or IP address in this header matches the actuall hostname or IP address before any processing is done.
+
+In the case of a mismatch then a ```417 Expectation Failed``` error should be returned.
 
 [Top](#yamtp)
+
+#####2.1.1.5: Connection
+
+**TODO**
+
+[Top](#yamtp)
+
+#####2.1.1.6: Content-Type
+
+This is the mime type of the data being sent to the server.
+
+This should always be ```text/json``` and the server should accept no other mime types.
+
+In the case of another mime type being sent then a ```415 Unsupported Media Type``` error should be returned.
+
+[Top](#yamtp)
+
+#####2.1.1.7: Content-Length
+
+This is the length in bytes of the data being sent to the server.
+
+This value should be checked against the length of the data before proccessing is done and HAS to match.
+
+In the case of the Content-Length header missing then a ```411 Length Required``` error should be returned.
+
+In the case of the Content-Length header not matching the length of the data sent to the server then a ```422 Unprocessable Entity``` error should be returned.
+
+[Top](#yamtp)
+
+####2.1.2: Stream Data
+
+**TODO**
 
 ***Changing the rest of this file***
 
