@@ -19,11 +19,11 @@ The Yet Another Message Transfer Protocol.
 		 * [2.1.2.1.2: Mime](#21212-mime)
          * [2.1.2.1.3: Enc](#21213-enc)
 		 * [2.1.2.1.4: Auth](#21214-auth)
-	   * [2.1.2.2: Credentials **TODO**](#2122-credentials)
-		 * [2.1.2.2.1: Username **TODO**](#21221-username)
-		 * [2.1.2.2.2: Password **TODO**](#21222-password)
-       * [2.1.2.3: Message **TODO**](#2123-message)
-       * [2.1.2.4: Callback **TODO**](#2124-callback)
+	   * [2.1.2.2: Credentials](#2122-credentials)
+		 * [2.1.2.2.1: Username](#21221-username)
+		 * [2.1.2.2.2: Password](#21222-password)
+       * [2.1.2.3: Message](#2123-message)
+       * [2.1.2.4: Callback](#2124-callback)
 
 ##1: About
 
@@ -215,9 +215,9 @@ Headers is required by the server. If it is not sent the a ```400 Bad Request```
 
 ######2.1.2.1.1: Method
 
-**Type:** *String*
-*Default:* *GET*
-*Values:* *GET, POST, PUT, UPDATE, DELETE*
+* **Type:** *String*
+* *Default:* *GET*
+* *Values:* *GET, POST, PUT, UPDATE, DELETE*
 
 The method is set here to keep consistancy when using a non YAMTP server.
 
@@ -232,9 +232,9 @@ If the method is set and is a valid method but the proccess requires a diferent 
 
 ######2.1.2.1.2: Mime
 
-**Type:** *String*
-*Default:* *text/plain*
-*Values:* *Any valid mime type*
+* **Type:** *String*
+* *Default:* *text/plain*
+* *Values:* *Any valid mime type*
 
 The mime type of the message or all messages if message is an array of messages.
 
@@ -247,9 +247,9 @@ This property should always be set. If it is not set it does not match the, or a
 
 ######2.1.2.1.3: Enc
 
-**Type:** *String*
-*Default:* *text/plain*
-*Values:* *URL* or *BASE64* or *UUENCODE*
+* **Type:** *String*
+* *Default:* *text/plain*
+* *Values:* *URL* or *BASE64* or *UUENCODE*
 
 If the message or messages are encoded in any way then this needs to be set to the type of encoding used.
 
@@ -261,9 +261,9 @@ This property should always be set. If it is not set or it is not a valid value 
 
 ######2.1.2.1.4: Auth
 
-**Type:** *Boolean*
-*Default:* *FALSE*
-*Values:* *TRUE* or *FALSE*
+* **Type:** *Boolean*
+* *Default:* *FALSE*
+* *Values:* *TRUE* or *FALSE*
 
 If set to TRUE then the server shold look for the credentials property. If set to FALSE the the credentials property is ignored.
 
@@ -275,31 +275,69 @@ For authentication responses and errors please see the authentication section.
 
 #####2.1.2.2: Credentials
 
-**TODO**
+* **Type:** *Object*
+* *Default:* *{ "username": "", "password": "" }*
+* *Values:* *Object*
+
+This is the user credentials object.
+
+This object should be ommited if the header *auth* is set to FALSE.
+
+If the header *auth* is set to true then this object MUST be included.
+
+The credentials object MUST include the two properties *username* and *password* as described below.
+
+Other properties may be included within this object but ONLY properties required for authentication.
 
 [Top](#yamtp)
 
 ######2.1.2.2.1: Username
 
-**TODO**
+* **Type:** *String*
+* *Default:* *Empty String*
+* *Values:* *Any characters valid for the users username*
+
+This is used to authenticate the user making the request.
+
+This must only be read it the header *auth* is set to TRUE
 
 [Top](#yamtp)
 
 ######2.1.2.2.2: Password
 
-**TODO**
+* **Type:** *String*
+* *Default:* *Empty String*
+* *Values:* *Any characters valid for the users password*
+
+This is used to authenticate the user making the request.
+
+This must only be read it the header *auth* is set to TRUE
 
 [Top](#yamtp)
 
 #####2.1.2.3: Message
 
-**TODO**
+* **Type:** *JSON Object, Array or String*
+* *Default:* *Empty Array*
+* *Values:* *Any message defined by the server and client*
+
+This is the payload of the request.
+
+The message can be a String, an Array, or a JSON Object.
+
+This is a required property if the message is empty or not set then a ```422 Unprocessable Entity``` error should be returned.
 
 [Top](#yamtp)
 
 #####2.1.2.4: Callback
 
-**TODO**
+* **Type:** *String*
+* *Default:* *Empty String*
+* *Values:* *Any character as defined by the language used for making the request for function class / method names*
+
+This is used to run a function on the calling computer after the server has given it's response.
+
+This should ONLY EVER be a string and should Never be a function itself.
 
 [Top](#yamtp)
 
