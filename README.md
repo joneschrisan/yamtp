@@ -31,6 +31,8 @@ YAMTP is loosely bases on the HTTP 1.1 (rfc2616) protocol (found [here](https://
 
 !***NOTE: This definition has not yet been finished and finalized. As such it may (and probably will) change without warning. A version number will be added when the definition has been finalized!***!
 
+[Top](#yamtp)
+
 ##2: Definition
 
 **YAMTP should be used with the following constraints.**
@@ -43,6 +45,8 @@ All lines should end with ```CRLF``` (```\r\n```) NOT ```CR``` (```\r```) or ```
 
 Sessions should NEVER be used. Please see the authentication section for mor detail.
 
+[Top](#yamtp)
+
 ###2.1: Requests:
 
 The data stream should consist of:
@@ -52,6 +56,8 @@ Headers\r\n
 Content Data\r\n
 \r\n
 ```
+
+[Top](#yamtp)
 
 ####2.1.1: Stream Headers
 ```
@@ -65,6 +71,8 @@ Content-Length: [length of data in bytes]\r\n
 
 ***NOTE: When using HTTP the first line should be*** ```POST [path to page] HTTP/1.1\r\n``` ***and the extra HTTP header*** ```YAMTP-Method: [mothod]\r\n``` ***should be set***
 
+[Top](#yamtp)
+
 #####2.1.1.1: Methods
 
 Methods are the same as HTTP methods and should only be used for the following reasons:
@@ -77,6 +85,8 @@ Methods are the same as HTTP methods and should only be used for the following r
 | UPDATE | Used to update data on the server (Update a record in a database) |
 | DELETE | Used to delete data from the server (Delete a record from a database) |
 
+[Top](#yamtp)
+
 #####2.1.1.2: Pages
 
 The page ([path to page] in the header stream example [above](#211streamheaders)) should be set to the a file path to the file being called relative to the base dir or document root of the server.
@@ -86,6 +96,8 @@ The page ([path to page] in the header stream example [above](#211streamheaders)
 * If foo.yamtp in inside a sub directory of foobar on the file system then the path to page should be ```/foobar/foo.yamtp```
 * The same goes for document root if using a web server to host a YAMTP service.
 
+[Top](#yamtp)
+
 #####2.1.1.3: Protocols and Versions
 
 The protocol name for a YAMTP request is *YAMTP*, this should be replaced with *HTTP* if sending a request to a web server.
@@ -94,9 +106,12 @@ The version number is the version of the protocol you are using. ```0.0.03``` fo
 
 The protocol and version should be seperated with a ```/```.
 
+[Top](#yamtp)
+
 #####2.1.1.4: Host
 
 
+[Top](#yamtp)
 
 ***Changing the rest of this file***
 
