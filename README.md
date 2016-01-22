@@ -14,11 +14,11 @@ The Yet Another Message Transfer Protocol.
       * [2.1.1.6: Content-Type](#2116-content-type)
       * [2.1.1.7: Content-Length](#2117-content-length)
      * [2.1.2: Stream Data](#212-stream-data)
-	   * [2.1.2.1: Headers](2121-headers)
-         * [2.1.2.1.1: Method](21211-method)
-		 * [2.1.2.1.2: Mime](21212-mime)
-         * [2.1.2.1.3: Enc](21213-enc)
-		 * [2.1.2.1.4: Auth](21214-auth)
+	   * [2.1.2.1: Headers](#2121-headers)
+         * [2.1.2.1.1: Method](#21211-method)
+		 * [2.1.2.1.2: Mime](#21212-mime)
+         * [2.1.2.1.3: Enc](#21213-enc)
+		 * [2.1.2.1.4: Auth](#21214-auth)
 	   * [2.1.2.2: Credentials **TODO**](#2122-credentials)
 		 * [2.1.2.2.1: Username **TODO**](#21221-username)
 		 * [2.1.2.2.2: Password **TODO**](#21222-password)
@@ -66,12 +66,21 @@ The data stream should consist of:
 [Top](#yamtp)
 
 ####2.1.1: Stream Headers
+
+* [method](#2111-methods)
+* [path to page](#2112-pages)
+* [YAMTP/version](#2113-protocols-and-versions)
+* [Host](#2114-host)
+* [Connection](#2115-connection)
+* [Content-Type](#2116-content-type)
+* [Content-Length](#2117-content-length)
+
 ```
-[[method]](#2111-methods) [[path to page]](#2112-pages) [YAMTP/[version]](#2113-protocols-and-versions)\r\n
-[Host: [remote hostname]](#2114-host)\r\n
-[Connection: [connection type]](#2115-connection)\r\n
-[Content-Type: text/json](#2116-content-type)\r\n
-[Content-Length: [length of data in bytes]](#2117-content-length)\r\n
+[method] [path to page] YAMTP/[version]\r\n
+Host: [remote hostname]\r\n
+Connection: [connection type]\r\n
+Content-Type: text/json\r\n
+Content-Length: [length of data in bytes]\r\n
 \r\n
 ```
 
@@ -160,24 +169,35 @@ In the case of the Content-Length header not matching the length of the data sen
 
 ####2.1.2: Stream Data
 
+* [headers](#2121-eaders)
+  * [method](#21211-method)
+  * [mime](#21212-mime)
+  * [enc](#21213-enc)
+  * [auth](#21214-auth)
+* [credentials](#2122-credentials)
+  * [username](#21221-username)
+  * [password](#21222-password)
+* [message](#2123-message)
+* [callback](#2124-callback)
+
 Data should always be valid JSON.
 
 The JSON object should contain the following properties, arrays, and objects:
 
 ```json
 {
-    "[headers](#2121-eaders)"   	: {
-		"[method](#21211-method)": String
-        "[mime](#21212-mime)"	: String,
-        "[enc](#21213-enc)"   : NULL|String,
-        "[auth](#21214-auth)"  : TRUE|FALSE
+    "headers"   	: {
+		"method": "GET",
+        "mime"	: "text/plain",
+        "enc"   : null,
+        "auth"  : false
     },
-	"[credentials](#2122-credentials)"	: {
-		"[username](#21221-username)"	: String
-		"[password](#21222-password)"	: String
+	"credentials"	: {
+		"username"	: "",
+		"password"	: ""
 	},
-    "[message](#2123-message)"   	: Array|String,
-    "[callback](#2124-callback)"  	: NULL
+    "message"   	: [],
+    "callback"  	: null
 }
 ```
 
