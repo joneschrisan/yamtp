@@ -3,21 +3,21 @@ The Yet Another Message Transfer Protocol.
 
 ##Table of contents
 
-[1: About](#1about)
+[1: About](#1-about)
 
-[2: Definition](#2definition)
+[2: Definition](#2-definition)
 
-[2.1: Requests](#21requests)
+[2.1: Requests](#21-requests)
 
-[2.1.1: Stream Headers](#211streamheaders)
+[2.1.1: Stream Headers](#211-streamheaders)
 
-[2.1.1.1: Methods](#2111methods)
+[2.1.1.1: Methods](#2111-methods)
 
-[2.1.1.2: Pages](#2112pages)
+[2.1.1.2: Pages](#2112-pages)
 
-[2.1.1.3: Protocols and Versions](#2113protocolsandversions)
+[2.1.1.3: Protocols and Versions](#2113-protocols-and-versions)
 
-[2.1.1.4: Host](#2114host)
+[2.1.1.4: Host](#2114-host)
 
 ##1: About
 
