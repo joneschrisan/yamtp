@@ -10,10 +10,10 @@ The Yet Another Message Transfer Protocol.
       * [2.1.1.2: Pages](#2112-pages)
       * [2.1.1.3: Protocols and Versions](#2113-protocols-and-versions)
       * [2.1.1.4: Host](#2114-host)
-      * [2.1.1.5: Connection](#2115-connection)
+      * [2.1.1.5: Connection **TODO**](#2115-connection)
       * [2.1.1.6: Content-Type](#2116-content-type)
       * [2.1.1.7: Content-Length](#2117-content-length)
-     *[2.1.2: Stream Data](#212-stream-data)
+     * [2.1.2: Stream Data **TODO**](#212-stream-data)
 
 ##1: About
 
