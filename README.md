@@ -287,11 +287,13 @@ This is the user credentials object.
 
 This object should be ommited if the header *auth* is set to FALSE.
 
-If the header *auth* is set to true then this object MUST be included.
+If the header *auth* is set to true then this object MUST be included. If it is not set or it is not a valid value then a ```422 Unprocessable Entity``` error should be returned.
 
 The credentials object MUST include the two properties *username* and *password* as described below.
 
 Other properties may be included within this object but ONLY properties required for authentication.
+
+The values for all properties within this object shloud ALWAYS be encrypted.
 
 [Top](#yamtp)
 
