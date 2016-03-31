@@ -221,8 +221,8 @@ Headers is required by the server. If it is not sent the a ```400 Bad Request```
 ######2.1.2.1.1: Method
 
 * **Type:** *String*
-* *Default:* *GET*
-* *Values:* *GET, POST, PUT, UPDATE, DELETE*
+* **Default:** *GET*
+* **Values:** *GET, POST, PUT, UPDATE, DELETE*
 
 The method is set here to keep consistancy when using a non YAMTP server.
 
@@ -238,8 +238,8 @@ If the method is set and is a valid method but the proccess requires a diferent 
 ######2.1.2.1.2: Mime
 
 * **Type:** *String*
-* *Default:* *text/plain*
-* *Values:* *Any valid mime type*
+* **Default:** *text/plain*
+* **Values:** *Any valid mime type*
 
 The mime type of the message or all messages if message is an array of messages.
 
@@ -253,8 +253,8 @@ This property should always be set. If it is not set it does not match the, or a
 ######2.1.2.1.3: Enc
 
 * **Type:** *String*
-* *Default:* *text/plain*
-* *Values:* *URL* or *BASE64* or *UUENCODE*
+* **Default:** *text/plain*
+* **Values:** *URL* or *BASE64* or *UUENCODE*
 
 If the message or messages are encoded in any way then this needs to be set to the type of encoding used.
 
@@ -267,8 +267,8 @@ This property should always be set. If it is not set or it is not a valid value 
 ######2.1.2.1.4: Auth
 
 * **Type:** *Boolean*
-* *Default:* *FALSE*
-* *Values:* *TRUE* or *FALSE*
+* **Default:** *FALSE*
+* **Values:** *TRUE* or *FALSE*
 
 If set to TRUE then the server shold look for the credentials property. If set to FALSE the the credentials property is ignored.
 
@@ -298,8 +298,8 @@ Other properties may be included within this object but ONLY properties required
 ######2.1.2.2.1: Username
 
 * **Type:** *String*
-* *Default:* *Empty String*
-* *Values:* *Any characters valid for the users username*
+* **Default:** *Empty String*
+* **Values:** *Any characters valid for the users username*
 
 This is used to authenticate the user making the request.
 
@@ -310,8 +310,8 @@ This must only be read it the header *auth* is set to TRUE
 ######2.1.2.2.2: Password
 
 * **Type:** *String*
-* *Default:* *Empty String*
-* *Values:* *Any characters valid for the users password*
+* **Default:** *Empty String*
+* **Values:** *Any characters valid for the users password*
 
 This is used to authenticate the user making the request.
 
@@ -322,8 +322,8 @@ This must only be read it the header *auth* is set to TRUE
 #####2.1.2.3: Message
 
 * **Type:** *JSON Object, Array or String*
-* *Default:* *Empty Array*
-* *Values:* *Any message defined by the server and client*
+* **Default:** *Empty Array*
+* **Values:** *Any message defined by the server and client*
 
 This is the payload of the request.
 
@@ -336,12 +336,12 @@ This is a required property if the message is empty or not set then a ```422 Unp
 #####2.1.2.4: Callback
 
 * **Type:** *String*
-* *Default:* *Empty String*
-* *Values:* *Any character as defined by the language used for making the request for function class / method names*
+* **Default:** *Empty String*
+* **Values:** *Any character as defined by the language used for making the request for function class / method names*
 
-This is used to run a function on the calling computer after the server has given it's response.
+This is used to run a function class / method on the calling computer after the server has given it's response.
 
-This should ONLY EVER be a string and should Never be a function itself.
+This should ONLY EVER be a string referincing the name of the function or class / method to be called and should Never be a function itself.
 
 [Top](#yamtp)
 
